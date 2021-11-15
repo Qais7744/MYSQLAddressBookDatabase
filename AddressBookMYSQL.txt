@@ -1,4 +1,4 @@
-UC1 CREATE DATABASE AddressBook
+UC1 CREATE DATABASE AddressBook in MYSQL
 
 mysql> CREATE DATABASE Address_Book_Service_database;
 Query OK, 1 row affected (0.03 sec)
