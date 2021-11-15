@@ -1,0 +1,18 @@
+UC1 CREATE DATABASE AddressBook
+
+mysql> CREATE DATABASE Address_Book_Service_database;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> show databases;
++-------------------------------+
+| Database                      |
++-------------------------------+
+| address_book_service_database |
+| altamashmb                    |
+| information_schema            |
+| mysql                         |
+| payroll_service               |
+| performance_schema            |
+| sys                           |
++-------------------------------+
+7 rows in set (0.02 sec)
