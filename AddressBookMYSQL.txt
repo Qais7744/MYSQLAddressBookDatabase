@@ -1,9 +1,11 @@
-UC6 Size of addresbook by city or state.
+UC8 Ability to retrieve entries sorted alphabetically by Person’s name for a given city.
 
-mysql> SELECT COUNT(*) FROM addressbook WHERE city='Nipani' or state='Karnataka';
+mysql> SELECT city FROM addressbook ORDER BY firstname;
 +----------+
-| COUNT(*) |
+| city     |
 +----------+
-|        2 |
+| Nipani   |
+| Bengluru |
+| Surat    |
 +----------+
-1 row in set (0.00 sec)
+3 rows in set (0.01 sec)
