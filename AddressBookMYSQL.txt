@@ -56,3 +56,24 @@ mysql> describe addressbook;
 | email       | varchar(150) | NO   |     | NULL    |       |
 +-------------+--------------+------+-----+---------+-------+
 8 rows in set (0.01 sec)
+
+UC3 Insert new Contact to addressbook.
+
+mysql> INSERT INTO addressbook (firstname, lastname, address, city, state, zip, phonenumber, email) VALUES
+    ->          ( 'Altamash', 'Bagwan', 'MahatGalli', 'Nipani', 'Karnataka', '591237', '7744918893', 'abagwan23@gmail.com' ),
+    ->          ( 'Omkar', 'Gawade', 'SultanChowk', 'Chandgad', 'Maharashtra', '411829', '8891023743', 'omkar@gmail.com' ),
+    ->          ( 'Sahil', 'Bagwan', 'GhatRoad', 'Miraj', 'Maharashtra', '4001101', '9910489420', 'sahil@gmail.com' ),
+    ->          ( 'Shailesh', 'Dubey', 'CottonRoad', 'Surat', 'Gujrat', '336005', '9104842314', 'shailesh@gmail.com' );
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM addressbook;
++-----------+----------+-------------+----------+-------------+---------+-------------+---------------------+
+| firstname | lastname | address     | city     | state       | zip     | phonenumber | email               |
++-----------+----------+-------------+----------+-------------+---------+-------------+---------------------+
+| Altamash  | Bagwan   | MahatGalli  | Nipani   | Karnataka   | 591237  | 7744918893  | abagwan23@gmail.com |
+| Omkar     | Gawade   | SultanChowk | Chandgad | Maharashtra | 411829  | 8891023743  | omkar@gmail.com     |
+| Sahil     | Bagwan   | GhatRoad    | Miraj    | Maharashtra | 4001101 | 9910489420  | sahil@gmail.com     |
+| Shailesh  | Dubey    | CottonRoad  | Surat    | Gujrat      | 336005  | 9104842314  | shailesh@gmail.com  |
++-----------+----------+-------------+----------+-------------+---------+-------------+---------------------+
+4 rows in set (0.02 sec)
