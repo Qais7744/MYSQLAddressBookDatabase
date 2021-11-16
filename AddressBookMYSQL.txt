@@ -1,55 +1,9 @@
-UC9 Ability to identify each Address Book with name and Type.
+UC10 Ability to get number of contact persons i.e. count by type.
 
-mysql> ALTER TABLE addressbook ADD type CHAR(50) AFTER lastname;
-Query OK, 0 rows affected (0.13 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> SELECT * FROM addressbook;
-+-----------+----------+------+------------+----------+-----------+--------+-------------+---------------------+
-| firstname | lastname | type | address    | city     | state     | zip    | phonenumber | email               |
-+-----------+----------+------+------------+----------+-----------+--------+-------------+---------------------+
-| Altamash  | Bagwan   | NULL | MahatGalli | Nipani   | Karnataka | 591237 | 7744918893  | abagwan23@gmail.com |
-| Salaman   | Pasha    | NULL | Bismillah  | Bengluru | Karnataka | 530068 | 7204536712  | salaman@gmail.com   |
-| Shailesh  | Dubey    | NULL | CottonRoad | Surat    | Gujrat    | 336005 | 9104842314  | shailesh@gmail.com  |
-+-----------+----------+------+------------+----------+-----------+--------+-------------+---------------------+
-3 rows in set (0.00 sec)
-
-mysql> ALTER TABLE addressbook ADD name CHAR(50) AFTER lastname;
-Query OK, 0 rows affected (0.08 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> SELECT * FROM addressbook;
-+-----------+----------+------+------+------------+----------+-----------+--------+-------------+---------------------+
-| firstname | lastname | name | type | address    | city     | state     | zip    | phonenumber | email               |
-+-----------+----------+------+------+------------+----------+-----------+--------+-------------+---------------------+
-| Altamash  | Bagwan   | NULL | NULL | MahatGalli | Nipani   | Karnataka | 591237 | 7744918893  | abagwan23@gmail.com |
-| Salaman   | Pasha    | NULL | NULL | Bismillah  | Bengluru | Karnataka | 530068 | 7204536712  | salaman@gmail.com   |
-| Shailesh  | Dubey    | NULL | NULL | CottonRoad | Surat    | Gujrat    | 336005 | 9104842314  | shailesh@gmail.com  |
-+-----------+----------+------+------+------------+----------+-----------+--------+-------------+---------------------+
-3 rows in set (0.00 sec)
-
-mysql> update addressbook set name ='AddressBook1' WHERE firstname ='Altamash' or firstname ='Shailesh';
-Query OK, 2 rows affected (0.02 sec)
-Rows matched: 2  Changed: 2  Warnings: 0
-
-mysql> update addressbook set name ='AddressBook2' WHERE firstname ='Salaman';
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> update addressbook set type ='Friends' WHERE firstname ='Altamash' or firstname ='Shailesh';
-Query OK, 2 rows affected (0.02 sec)
-Rows matched: 2  Changed: 2  Warnings: 0
-
-mysql> update addressbook set type ='Family' WHERE firstname ='Salaman';
-Query OK, 1 row affected (0.02 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> SELECT * FROM addressbook;
-+-----------+----------+--------------+---------+------------+----------+-----------+--------+-------------+---------------------+
-| firstname | lastname | name         | type    | address    | city     | state     | zip    | phonenumber | email               |
-+-----------+----------+--------------+---------+------------+----------+-----------+--------+-------------+---------------------+
-| Altamash  | Bagwan   | AddressBook1 | Friends | MahatGalli | Nipani   | Karnataka | 591237 | 7744918893  | abagwan23@gmail.com |
-| Salaman   | Pasha    | AddressBook2 | Family  | Bismillah  | Bengluru | Karnataka | 530068 | 7204536712  | salaman@gmail.com   |
-| Shailesh  | Dubey    | AddressBook1 | Friends | CottonRoad | Surat    | Gujrat    | 336005 | 9104842314  | shailesh@gmail.com  |
-+-----------+----------+--------------+---------+------------+----------+-----------+--------+-------------+---------------------+
-3 rows in set (0.00 sec)
+mysql> SELECT count(*) from addressbook where type = 'Friends';
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.02 sec)
