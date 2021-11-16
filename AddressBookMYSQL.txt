@@ -77,3 +77,20 @@ mysql> SELECT * FROM addressbook;
 | Shailesh  | Dubey    | CottonRoad  | Surat    | Gujrat      | 336005  | 9104842314  | shailesh@gmail.com  |
 +-----------+----------+-------------+----------+-------------+---------+-------------+---------------------+
 4 rows in set (0.02 sec)
+
+UC4 Edit Contact to addressbook.
+
+mysql> update addressbook set firstname ='Salaman', lastname='Pasha', address='Bismillah', city='Bengluru', state='Karnataka', zip='530068', phonenumber='7204536712', email='salaman@gmail.com' WHERE firstname='Omkar';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM addressbook;
++-----------+----------+------------+----------+-------------+---------+-------------+---------------------+
+| firstname | lastname | address    | city     | state       | zip     | phonenumber | email               |
++-----------+----------+------------+----------+-------------+---------+-------------+---------------------+
+| Altamash  | Bagwan   | MahatGalli | Nipani   | Karnataka   | 591237  | 7744918893  | abagwan23@gmail.com |
+| Salaman   | Pasha    | Bismillah  | Bengluru | Karnataka   | 530068  | 7204536712  | salaman@gmail.com   |
+| Sahil     | Bagwan   | GhatRoad   | Miraj    | Maharashtra | 4001101 | 9910489420  | sahil@gmail.com     |
+| Shailesh  | Dubey    | CottonRoad | Surat    | Gujrat      | 336005  | 9104842314  | shailesh@gmail.com  |
++-----------+----------+------------+----------+-------------+---------+-------------+---------------------+
+4 rows in set (0.02 sec)
