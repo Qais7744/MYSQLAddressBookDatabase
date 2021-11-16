@@ -1,9 +1,16 @@
-UC10 Ability to get number of contact persons i.e. count by type.
+UC11 Ability to add person to both Friend and Family.
 
-mysql> SELECT count(*) from addressbook where type = 'Friends';
-+----------+
-| count(*) |
-+----------+
-|        2 |
-+----------+
-1 row in set (0.02 sec)
+mysql> INSERT INTO addressbook (firstname,lastname,name,type,address,city,state,zip,phonenumber,email) values('Rahul','Labade','Addressbook1','Friends','GhandhiChowk','Baramati','Maharashtra','430115','9900785423','rahul@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT * FROM addressbook;
++-----------+----------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
+| firstname | lastname | name         | type         | address      | city     | state       | zip    | phonenumber | email               |
++-----------+----------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
+| Altamash  | Bagwan   | AddressBook1 | Friends      | MahatGalli   | Nipani   | Karnataka   | 591237 | 7744918893  | abagwan23@gmail.com |
+| Salaman   | Pasha    | AddressBook2 | Family       | Bismillah    | Bengluru | Karnataka   | 530068 | 7204536712  | salaman@gmail.com   |
+| Shailesh  | Dubey    | AddressBook1 | Friends      | CottonRoad   | Surat    | Gujrat      | 336005 | 9104842314  | shailesh@gmail.com  |
+| Omkar     | Sutar    | Addressbook3 | Professional | Birobamal    | Nipani   | Karnataka   | 591237 | 756412390   | omkars@gmail.com    |
+| Rahul     | Labade   | Addressbook1 | Friends      | GhandhiChowk | Baramati | Maharashtra | 430115 | 9900785423  | rahul@gmail.com     |
++-----------+----------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
+5 rows in set (0.00 sec)
