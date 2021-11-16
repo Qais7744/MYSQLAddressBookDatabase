@@ -94,3 +94,18 @@ mysql> SELECT * FROM addressbook;
 | Shailesh  | Dubey    | CottonRoad | Surat    | Gujrat      | 336005  | 9104842314  | shailesh@gmail.com  |
 +-----------+----------+------------+----------+-------------+---------+-------------+---------------------+
 4 rows in set (0.02 sec)
+
+UC5 Delete Contact to addressbook.
+
+mysql> DELETE FROM addressbook WHERE firstname ='Sahil';
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT * FROM addressbook;
++-----------+----------+------------+----------+-----------+--------+-------------+---------------------+
+| firstname | lastname | address    | city     | state     | zip    | phonenumber | email               |
++-----------+----------+------------+----------+-----------+--------+-------------+---------------------+
+| Altamash  | Bagwan   | MahatGalli | Nipani   | Karnataka | 591237 | 7744918893  | abagwan23@gmail.com |
+| Salaman   | Pasha    | Bismillah  | Bengluru | Karnataka | 530068 | 7204536712  | salaman@gmail.com   |
+| Shailesh  | Dubey    | CottonRoad | Surat    | Gujrat    | 336005 | 9104842314  | shailesh@gmail.com  |
++-----------+----------+------------+----------+-----------+--------+-------------+---------------------+
+3 rows in set (0.02 sec)
