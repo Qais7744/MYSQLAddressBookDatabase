@@ -1,4 +1,4 @@
-UC11 Ability to add person to both Friend and Family.
+UC11 Ability to add person to both Friend and Family in addressbook.
 
 mysql> INSERT INTO addressbook (firstname,lastname,name,type,address,city,state,zip,phonenumber,email) values('Rahul','Labade','Addressbook1','Friends','GhandhiChowk','Baramati','Maharashtra','430115','9900785423','rahul@gmail.com');
 Query OK, 1 row affected (0.02 sec)
