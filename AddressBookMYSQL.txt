@@ -1,471 +1,67 @@
-UC12 Apply 1NF on Normalization first add employee_id.
+UC13 Ensure all retrieve queries done especially in UC 6, UC 7, UC 8 and UC 10 are working with new table structure in addressbook.
 
-mysql> select * from addressbook;
-+-----------+----------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| firstname | lastname | name         | type         | address      | city     | state       | zip    | phonenumber | email               |
-+-----------+----------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| Altamash  | Bagwan   | AddressBook1 | Friends      | MahatGalli   | Nipani   | Karnataka   | 591237 | 7744918893  | abagwan23@gmail.com |
-| Salaman   | Pasha    | AddressBook2 | Family       | Bismillah    | Bengluru | Karnataka   | 530068 | 7204536712  | salaman@gmail.com   |
-| Shailesh  | Dubey    | AddressBook1 | Friends      | CottonRoad   | Surat    | Gujrat      | 336005 | 9104842314  | shailesh@gmail.com  |
-| Omkar     | Sutar    | Addressbook3 | Professional | Birobamal    | Nipani   | Karnataka   | 591237 | 756412390   | omkars@gmail.com    |
-| Rahul     | Labade   | Addressbook1 | Friends      | GhandhiChowk | Baramati | Maharashtra | 430115 | 9900785423  | rahul@gmail.com     |
-+-----------+----------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-5 rows in set (0.01 sec)
-
-mysql> ALTER TABLE addressbook add employee_id numeric null after lastname;
-Query OK, 0 rows affected (0.14 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> select * from addressbook;
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| firstname | lastname | employee_id | name         | type         | address      | city     | state       | zip    | phonenumber | email               |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| Altamash  | Bagwan   |        NULL | AddressBook1 | Friends      | MahatGalli   | Nipani   | Karnataka   | 591237 | 7744918893  | abagwan23@gmail.com |
-| Salaman   | Pasha    |        NULL | AddressBook2 | Family       | Bismillah    | Bengluru | Karnataka   | 530068 | 7204536712  | salaman@gmail.com   |
-| Shailesh  | Dubey    |        NULL | AddressBook1 | Friends      | CottonRoad   | Surat    | Gujrat      | 336005 | 9104842314  | shailesh@gmail.com  |
-| Omkar     | Sutar    |        NULL | Addressbook3 | Professional | Birobamal    | Nipani   | Karnataka   | 591237 | 756412390   | omkars@gmail.com    |
-| Rahul     | Labade   |        NULL | Addressbook1 | Friends      | GhandhiChowk | Baramati | Maharashtra | 430115 | 9900785423  | rahul@gmail.com     |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-5 rows in set (0.00 sec)
-
-mysql> update addressbook set employee_id = 11 where firstname = 'Altamash';
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select * from addressbook;
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| firstname | lastname | employee_id | name         | type         | address      | city     | state       | zip    | phonenumber | email               |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| Altamash  | Bagwan   |          11 | AddressBook1 | Friends      | MahatGalli   | Nipani   | Karnataka   | 591237 | 7744918893  | abagwan23@gmail.com |
-| Salaman   | Pasha    |        NULL | AddressBook2 | Family       | Bismillah    | Bengluru | Karnataka   | 530068 | 7204536712  | salaman@gmail.com   |
-| Shailesh  | Dubey    |        NULL | AddressBook1 | Friends      | CottonRoad   | Surat    | Gujrat      | 336005 | 9104842314  | shailesh@gmail.com  |
-| Omkar     | Sutar    |        NULL | Addressbook3 | Professional | Birobamal    | Nipani   | Karnataka   | 591237 | 756412390   | omkars@gmail.com    |
-| Rahul     | Labade   |        NULL | Addressbook1 | Friends      | GhandhiChowk | Baramati | Maharashtra | 430115 | 9900785423  | rahul@gmail.com     |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-5 rows in set (0.00 sec)
-
-mysql> update addressbook set employee_id = 11 where firstname = 'Shailesh';
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> update addressbook set employee_id = 21 where firstname = 'Shailesh';
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> update addressbook set employee_id = 11 where firstname = 'Salaman';
-Query OK, 1 row affected (0.02 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select * from addressbook;
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| firstname | lastname | employee_id | name         | type         | address      | city     | state       | zip    | phonenumber | email               |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| Altamash  | Bagwan   |          11 | AddressBook1 | Friends      | MahatGalli   | Nipani   | Karnataka   | 591237 | 7744918893  | abagwan23@gmail.com |
-| Salaman   | Pasha    |          11 | AddressBook2 | Family       | Bismillah    | Bengluru | Karnataka   | 530068 | 7204536712  | salaman@gmail.com   |
-| Shailesh  | Dubey    |          21 | AddressBook1 | Friends      | CottonRoad   | Surat    | Gujrat      | 336005 | 9104842314  | shailesh@gmail.com  |
-| Omkar     | Sutar    |        NULL | Addressbook3 | Professional | Birobamal    | Nipani   | Karnataka   | 591237 | 756412390   | omkars@gmail.com    |
-| Rahul     | Labade   |        NULL | Addressbook1 | Friends      | GhandhiChowk | Baramati | Maharashtra | 430115 | 9900785423  | rahul@gmail.com     |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-5 rows in set (0.00 sec)
-
-mysql> update addressbook set employee_id = 15 where firstname = 'omkar';
-Query OK, 1 row affected (0.02 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> update addressbook set employee_id = 31 where firstname = 'Rahul';
-Query OK, 1 row affected (0.02 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select * from addressbook;
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| firstname | lastname | employee_id | name         | type         | address      | city     | state       | zip    | phonenumber | email               |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| Altamash  | Bagwan   |          11 | AddressBook1 | Friends      | MahatGalli   | Nipani   | Karnataka   | 591237 | 7744918893  | abagwan23@gmail.com |
-| Salaman   | Pasha    |          11 | AddressBook2 | Family       | Bismillah    | Bengluru | Karnataka   | 530068 | 7204536712  | salaman@gmail.com   |
-| Shailesh  | Dubey    |          21 | AddressBook1 | Friends      | CottonRoad   | Surat    | Gujrat      | 336005 | 9104842314  | shailesh@gmail.com  |
-| Omkar     | Sutar    |          15 | Addressbook3 | Professional | Birobamal    | Nipani   | Karnataka   | 591237 | 756412390   | omkars@gmail.com    |
-| Rahul     | Labade   |          31 | Addressbook1 | Friends      | GhandhiChowk | Baramati | Maharashtra | 430115 | 9900785423  | rahul@gmail.com     |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-5 rows in set (0.00 sec)
-
-mysql> update addressbook set employee_id = 17 where firstname = 'Salaman';
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select * from addressbook;
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| firstname | lastname | employee_id | name         | type         | address      | city     | state       | zip    | phonenumber | email               |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| Altamash  | Bagwan   |          11 | AddressBook1 | Friends      | MahatGalli   | Nipani   | Karnataka   | 591237 | 7744918893  | abagwan23@gmail.com |
-| Salaman   | Pasha    |          17 | AddressBook2 | Family       | Bismillah    | Bengluru | Karnataka   | 530068 | 7204536712  | salaman@gmail.com   |
-| Shailesh  | Dubey    |          21 | AddressBook1 | Friends      | CottonRoad   | Surat    | Gujrat      | 336005 | 9104842314  | shailesh@gmail.com  |
-| Omkar     | Sutar    |          15 | Addressbook3 | Professional | Birobamal    | Nipani   | Karnataka   | 591237 | 756412390   | omkars@gmail.com    |
-| Rahul     | Labade   |          31 | Addressbook1 | Friends      | GhandhiChowk | Baramati | Maharashtra | 430115 | 9900785423  | rahul@gmail.com     |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-5 rows in set (0.00 sec)
-
-mysql> insert into addressbook(firstname,lastname,employee_id,name,type,address,city,state,zip,phonenumber,email) values('Altamash','Bagwan',11,'Addressbook1','Friends','MahatGalli','Nipani','Karnataka','591237','7204842313','altamash1@gmail.com');
-Query OK, 1 row affected (0.01 sec)
-
-mysql> select * from addressbook;
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| firstname | lastname | employee_id | name         | type         | address      | city     | state       | zip    | phonenumber | email               |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-| Altamash  | Bagwan   |          11 | AddressBook1 | Friends      | MahatGalli   | Nipani   | Karnataka   | 591237 | 7744918893  | abagwan23@gmail.com |
-| Salaman   | Pasha    |          17 | AddressBook2 | Family       | Bismillah    | Bengluru | Karnataka   | 530068 | 7204536712  | salaman@gmail.com   |
-| Shailesh  | Dubey    |          21 | AddressBook1 | Friends      | CottonRoad   | Surat    | Gujrat      | 336005 | 9104842314  | shailesh@gmail.com  |
-| Omkar     | Sutar    |          15 | Addressbook3 | Professional | Birobamal    | Nipani   | Karnataka   | 591237 | 756412390   | omkars@gmail.com    |
-| Rahul     | Labade   |          31 | Addressbook1 | Friends      | GhandhiChowk | Baramati | Maharashtra | 430115 | 9900785423  | rahul@gmail.com     |
-| Altamash  | Bagwan   |          11 | Addressbook1 | Friends      | MahatGalli   | Nipani   | Karnataka   | 591237 | 7204842313  | altamash1@gmail.com |
-+-----------+----------+-------------+--------------+--------------+--------------+----------+-------------+--------+-------------+---------------------+
-6 rows in set (0.00 sec)
-
-mysql> select * from addressbook where employee_id = 11;
-+-----------+----------+-------------+--------------+---------+------------+--------+-----------+--------+-------------+---------------------+
-| firstname | lastname | employee_id | name         | type    | address    | city   | state     | zip    | phonenumber | email               |
-+-----------+----------+-------------+--------------+---------+------------+--------+-----------+--------+-------------+---------------------+
-| Altamash  | Bagwan   |          11 | AddressBook1 | Friends | MahatGalli | Nipani | Karnataka | 591237 | 7744918893  | abagwan23@gmail.com |
-| Altamash  | Bagwan   |          11 | Addressbook1 | Friends | MahatGalli | Nipani | Karnataka | 591237 | 7204842313  | altamash1@gmail.com |
-+-----------+----------+-------------+--------------+---------+------------+--------+-----------+--------+-------------+---------------------+
-2 rows in set (0.00 sec)
-
-UC12 Apply 2NF on Normalization in addresssbook.
-
-mysql> create table person_details
-    -> (
-    -> person_id int not null auto_increment primary key,
-    -> city varchar(150) not null,
-    -> state varchar(150) not null,
-    -> email varchar(150) not null
-    -> );
-Query OK, 0 rows affected (0.14 sec)
-
-mysql> show tables;
-+-----------------------------------------+
-| Tables_in_address_book_service_database |
-+-----------------------------------------+
-| addressbook                             |
-| person_details                          |
-+-----------------------------------------+
-2 rows in set (0.03 sec)
-
-mysql> alter table person_details add column address varchar(150) not null;
-Query OK, 0 rows affected (0.05 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> describe person_details;
-+-----------+--------------+------+-----+---------+----------------+
-| Field     | Type         | Null | Key | Default | Extra          |
-+-----------+--------------+------+-----+---------+----------------+
-| person_id | int          | NO   | PRI | NULL    | auto_increment |
-| city      | varchar(150) | NO   |     | NULL    |                |
-| state     | varchar(150) | NO   |     | NULL    |                |
-| email     | varchar(150) | NO   |     | NULL    |                |
-| address   | varchar(150) | NO   |     | NULL    |                |
-+-----------+--------------+------+-----+---------+----------------+
-5 rows in set (0.03 sec)
-
-mysql> insert into person_details(city,state,email,address) values('Nipani','Karnataka','altamash23@gmail.com','MahatGalli');
-Query OK, 1 row affected (0.02 sec)
-
-mysql> insert into person_details(city,state,email,address) values('Shailesh','Gujrat','shaileshr@gmail.com','22/6');
-Query OK, 1 row affected (0.02 sec)
-
-mysql> insert into person_details(city,state,email,address) values('Karad','Maharashtra','atiq21@gmail.com','Mandai');
-Query OK, 1 row affected (0.02 sec)
-
-mysql> insert into person_details(city,state,email,address) values('Hydrabaad','Telangana','Kalayan11@gmail.com','89/315Tirupatinagar');
-Query OK, 1 row affected (0.02 sec)
-
-mysql> insert into person_details(city,state,email,address) values('Bengluru','Karnataka','Salman786@gmail.com',BismillahNagar');
-    '> ^C
-mysql> insert into person_details(city,state,email,address) values('Bengluru','Karnataka','Salman786@gmail.com','BismillahNagar');
-Query OK, 1 row affected (0.02 sec)
-
-mysql> select * from person_details;
-+-----------+-----------+-------------+----------------------+---------------------+
-| person_id | city      | state       | email                | address             |
-+-----------+-----------+-------------+----------------------+---------------------+
-|         1 | Nipani    | Karnataka   | altamash23@gmail.com | MahatGalli          |
-|         2 | Shailesh  | Gujrat      | shaileshr@gmail.com  | 22/6                |
-|         3 | Karad     | Maharashtra | atiq21@gmail.com     | Mandai              |
-|         4 | Hydrabaad | Telangana   | Kalayan11@gmail.com  | 89/315Tirupatinagar |
-|         5 | Bengluru  | Karnataka   | Salman786@gmail.com  | BismillahNagar      |
-+-----------+-----------+-------------+----------------------+---------------------+
-5 rows in set (0.02 sec)
-
-mysql> update person_details set city ='Surat' where person_id = 2;
-Query OK, 1 row affected (0.02 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select * from person_details;
-+-----------+-----------+-------------+----------------------+---------------------+
-| person_id | city      | state       | email                | address             |
-+-----------+-----------+-------------+----------------------+---------------------+
-|         1 | Nipani    | Karnataka   | altamash23@gmail.com | MahatGalli          |
-|         2 | Surat     | Gujrat      | shaileshr@gmail.com  | 22/6                |
-|         3 | Karad     | Maharashtra | atiq21@gmail.com     | Mandai              |
-|         4 | Hydrabaad | Telangana   | Kalayan11@gmail.com  | 89/315Tirupatinagar |
-|         5 | Bengluru  | Karnataka   | Salman786@gmail.com  | BismillahNagar      |
-+-----------+-----------+-------------+----------------------+---------------------+
-5 rows in set (0.02 sec)
-
-mysql> create table person_mobile_number
-    -> (
-    -> mob_number_id int not null auto_increment primary key,
-    -> mob_number varchar(50) not null,
-    -> person_id int,
-    -> foreign key (person_id) references person_details(person_id)
-    -> );
-Query OK, 0 rows affected (0.10 sec)
-
-mysql> insert into person_mobile_number(mob_number,person_id) values ('7744918893',1),('9876545732',2),('9912345332',3),('7204842313',1),('7897862313',5),('8844312342',4),('9988443321',2);
-Query OK, 7 rows affected (0.03 sec)
-Records: 7  Duplicates: 0  Warnings: 0
-
-mysql> select * from person_mobile_number;
-+---------------+------------+-----------+
-| mob_number_id | mob_number | person_id |
-+---------------+------------+-----------+
-|             1 | 7744918893 |         1 |
-|             2 | 9876545732 |         2 |
-|             3 | 9912345332 |         3 |
-|             4 | 7204842313 |         1 |
-|             5 | 7897862313 |         5 |
-|             6 | 8844312342 |         4 |
-|             7 | 9988443321 |         2 |
-+---------------+------------+-----------+
-7 rows in set (0.00 sec)
-
-mysql> show tables;
-+-----------------------------------------+
-| Tables_in_address_book_service_database |
-+-----------------------------------------+
-| addressbook                             |
-| person_details                          |
-| person_mobile_number                    |
-+-----------------------------------------+
-3 rows in set (0.02 sec)
-
-mysql> drop table addressbook_name_type;
-Query OK, 0 rows affected (0.04 sec)
-
-mysql> create table addressbook_name
-    -> (
-    -> addressbook_id int not null auto_increment primary key,
-    -> addressbook varchar(150) not null
-    -> );
-Query OK, 0 rows affected (0.07 sec)
-
-mysql> insert into addressbook_name(addressbook) values('addressbook1'),('addressbook2'),('addressbook3'),('addressbook');
-Query OK, 4 rows affected (0.03 sec)
-Records: 4  Duplicates: 0  Warnings: 0
-
-mysql> select * from addressbook_name;
-+----------------+--------------+
-| addressbook_id | addressbook  |
-+----------------+--------------+
-|              1 | addressbook1 |
-|              2 | addressbook2 |
-|              3 | addressbook3 |
-|              4 | addressbook  |
-+----------------+--------------+
-4 rows in set (0.00 sec)
-
-mysql> update addressbook_name set addressbook = 'addressbook4' where addressbook_id = 4;
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select * from addressbook_name;
-+----------------+--------------+
-| addressbook_id | addressbook  |
-+----------------+--------------+
-|              1 | addressbook1 |
-|              2 | addressbook2 |
-|              3 | addressbook3 |
-|              4 | addressbook4 |
-+----------------+--------------+
-4 rows in set (0.02 sec)
-
-mysql> show tables;
-+-----------------------------------------+
-| Tables_in_address_book_service_database |
-+-----------------------------------------+
-| addressbook                             |
-| addressbook_name                        |
-| person_details                          |
-| person_mobile_number                    |
-+-----------------------------------------+
-4 rows in set (0.01 sec)
-
-mysql> create table person_data
-    -> (
-    -> persondata_id int not null auto_increment primary key,
-    -> firstname varchar(150) not null,
-    -> lastname varchar(150) not null,
-    -> Relation_type varchar(50) not null,
-    -> mob_number_id int,
-    -> foreign key(mob_number_id) references person_mobile_number(mob_number_id),
-    -> person_id int,
-    -> foreign key(person_id) references person_details(person_id)
-    -> );
-Query OK, 0 rows affected (0.07 sec)
-
-mysql> describe person_data;
-+---------------+--------------+------+-----+---------+----------------+
-| Field         | Type         | Null | Key | Default | Extra          |
-+---------------+--------------+------+-----+---------+----------------+
-| persondata_id | int          | NO   | PRI | NULL    | auto_increment |
-| firstname     | varchar(150) | NO   |     | NULL    |                |
-| lastname      | varchar(150) | NO   |     | NULL    |                |
-| Relation_type | varchar(50)  | NO   |     | NULL    |                |
-| mob_number_id | int          | YES  | MUL | NULL    |                |
-| person_id     | int          | YES  | MUL | NULL    |                |
-+---------------+--------------+------+-----+---------+----------------+
-6 rows in set (0.01 sec)
-
-mysql> insert into person_data(firstname,lastname,relation_type,mob_number_id,person_id) values('Altamash','Bagwan','Family',1,1);
-Query OK, 1 row affected (0.01 sec)
-
-mysql> insert into person_data(firstname,lastname,relation_type,mob_number_id,person_id) values('Shailesh','Dubey','Friend',2,2);
-Query OK, 1 row affected (0.01 sec)
-
-mysql> insert into person_data(firstname,lastname,relation_type,mob_number_id,person_id) values('Altamash','Bagwan','Family',4,1);
-Query OK, 1 row affected (0.02 sec)
-
-mysql> insert into person_data(firstname,lastname,relation_type,mob_number_id,person_id) values('Salman','Pasha','Friend',3,5);
-Query OK, 1 row affected (0.01 sec)
-
-mysql> insert into person_data(firstname,lastname,relation_type,mob_number_id,person_id) values('Atiq','Bagwan','Family',5,3);
-Query OK, 1 row affected (0.01 sec)
-
-mysql> insert into person_data(firstname,lastname,relation_type,mob_number_id,person_id) values('Kalayan','Taimure','Professional',6,4);
-Query OK, 1 row affected (0.01 sec)
-
-mysql> insert into person_data(firstname,lastname,relation_type,mob_number_id,person_id) values('Shailesh','Dubey','Friend',7,2);
-Query OK, 1 row affected (0.01 sec)
-
-mysql> select * from person_data;
-+---------------+-----------+----------+---------------+---------------+-----------+
-| persondata_id | firstname | lastname | Relation_type | mob_number_id | person_id |
-+---------------+-----------+----------+---------------+---------------+-----------+
-|             1 | Altamash  | Bagwan   | Family        |             1 |         1 |
-|             2 | Shailesh  | Dubey    | Friend        |             2 |         2 |
-|             3 | Altamash  | Bagwan   | Family        |             4 |         1 |
-|             4 | Salman    | Pasha    | Friend        |             3 |         5 |
-|             5 | Atiq      | Bagwan   | Family        |             5 |         3 |
-|             6 | Kalayan   | Taimure  | Professional  |             6 |         4 |
-|             7 | Shailesh  | Dubey    | Friend        |             7 |         2 |
-+---------------+-----------+----------+---------------+---------------+-----------+
-7 rows in set (0.00 sec)
-
-mysql> create table addressbook_has_person
-    -> (
-    -> address_id int not null auto_increment primary key,
-    -> person_id int,
-    -> foreign key(person_id) references person_details(person_id),
-    -> addressbook_id int,
-    -> foreign key(addressbook_id) references addressbook_name(addressbook_id)
-    -> );
-Query OK, 0 rows affected (0.09 sec)
-
-mysql> insert into addressbook_has_person(person_id,addressbook_id) values(1,1),(2,2),(3,3),(4,4),(5,1);
-Query OK, 5 rows affected (0.03 sec)
-Records: 5  Duplicates: 0  Warnings: 0
-
-mysql> select * from addressbook_has_person;
-+------------+-----------+----------------+
-| address_id | person_id | addressbook_id |
-+------------+-----------+----------------+
-|          1 |         1 |              1 |
-|          2 |         2 |              2 |
-|          3 |         3 |              3 |
-|          4 |         4 |              4 |
-|          5 |         5 |              1 |
-+------------+-----------+----------------+
-5 rows in set (0.00 sec)
-
-mysql> select person_data.firstname,person_data.lastname,person_data.Relation_type,person_details.city,person_details.state,person_details.email,person_details.address,addressbook_name.addressbook from person_data inner join person_mobile_number on person_data.mob_number_id = person_mobile_number.mob_number_id
-    -> inner join person_details on person_details.person_id = person_mobile_number.mob_number_id
-    -> inner join addressbook_name on addressbook_name.addressbook_id = person_details.person_id;
-+-----------+----------+---------------+-----------+-------------+----------------------+---------------------+--------------+
-| firstname | lastname | Relation_type | city      | state       | email                | address             | addressbook  |
-+-----------+----------+---------------+-----------+-------------+----------------------+---------------------+--------------+
-| Altamash  | Bagwan   | Family        | Nipani    | Karnataka   | altamash23@gmail.com | MahatGalli          | addressbook1 |
-| Shailesh  | Dubey    | Friend        | Surat     | Gujrat      | shaileshr@gmail.com  | 22/6                | addressbook2 |
-| Altamash  | Bagwan   | Family        | Hydrabaad | Telangana   | Kalayan11@gmail.com  | 89/315Tirupatinagar | addressbook4 |
-| Salman    | Pasha    | Friend        | Karad     | Maharashtra | atiq21@gmail.com     | Mandai              | addressbook3 |
-+-----------+----------+---------------+-----------+-------------+----------------------+---------------------+--------------+
-4 rows in set (0.03 sec)
-
-mysql> delete from person_data where persondata_id = 3;
-Query OK, 1 row affected (0.03 sec)
-
-mysql> delete from person_data where persondata_id = 7;
-Query OK, 1 row affected (0.01 sec)
-
-mysql> select * from person_data;
-+---------------+-----------+----------+---------------+---------------+-----------+
-| persondata_id | firstname | lastname | Relation_type | mob_number_id | person_id |
-+---------------+-----------+----------+---------------+---------------+-----------+
-|             1 | Altamash  | Bagwan   | Family        |             1 |         1 |
-|             2 | Shailesh  | Dubey    | Friend        |             2 |         2 |
-|             4 | Salman    | Pasha    | Friend        |             3 |         5 |
-|             5 | Atiq      | Bagwan   | Family        |             5 |         3 |
-|             6 | Kalayan   | Taimure  | Professional  |             6 |         4 |
-+---------------+-----------+----------+---------------+---------------+-----------+
-5 rows in set (0.00 sec)
-
-mysql> update person_data set persondata_id = 3 where firstname = 'Salman';
-Query OK, 1 row affected (0.03 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> update person_data set persondata_id = 4 where firstname = 'Atiq';
-Query OK, 1 row affected (0.03 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> update person_data set persondata_id = 5 where firstname = 'Kalayan';
-Query OK, 1 row affected (0.03 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select * from person_data;
-+---------------+-----------+----------+---------------+---------------+-----------+
-| persondata_id | firstname | lastname | Relation_type | mob_number_id | person_id |
-+---------------+-----------+----------+---------------+---------------+-----------+
-|             1 | Altamash  | Bagwan   | Family        |             1 |         1 |
-|             2 | Shailesh  | Dubey    | Friend        |             2 |         2 |
-|             3 | Salman    | Pasha    | Friend        |             3 |         5 |
-|             4 | Atiq      | Bagwan   | Family        |             5 |         3 |
-|             5 | Kalayan   | Taimure  | Professional  |             6 |         4 |
-+---------------+-----------+----------+---------------+---------------+-----------+
-5 rows in set (0.00 sec)
-
-mysql> delete from person_mobile_number where mob_number_id = 4;
-Query OK, 1 row affected (0.03 sec)
-
-mysql> delete from person_mobile_number where mob_number_id = 7;
-Query OK, 1 row affected (0.01 sec)
-
-mysql> select * from person_mobile_number;
-+---------------+------------+-----------+
-| mob_number_id | mob_number | person_id |
-+---------------+------------+-----------+
-|             1 | 7744918893 |         1 |
-|             2 | 9876545732 |         2 |
-|             3 | 9912345332 |         3 |
-|             5 | 7897862313 |         5 |
-|             6 | 8844312342 |         4 |
-+---------------+------------+-----------+
-5 rows in set (0.00 sec)
+UC6-
 
 mysql> select person_data.firstname,person_data.lastname,person_data.Relation_type,person_details.city,person_details.state,person_details.email,person_details.address,person_mobile_number.mob_number,addressbook_name.addressbook from person_data inner join person_mobile_number on person_data.mob_number_id = person_mobile_number.mob_number_id
     -> inner join person_details on person_details.person_id = person_mobile_number.mob_number_id
-    -> inner join addressbook_name on addressbook_name.addressbook_id = person_details.person_id;
-+-----------+----------+---------------+--------+-------------+----------------------+------------+------------+--------------+
-| firstname | lastname | Relation_type | city   | state       | email                | address    | mob_number | addressbook  |
-+-----------+----------+---------------+--------+-------------+----------------------+------------+------------+--------------+
-| Altamash  | Bagwan   | Family        | Nipani | Karnataka   | altamash23@gmail.com | MahatGalli | 7744918893 | addressbook1 |
-| Shailesh  | Dubey    | Friend        | Surat  | Gujrat      | shaileshr@gmail.com  | 22/6       | 9876545732 | addressbook2 |
-| Salman    | Pasha    | Friend        | Karad  | Maharashtra | atiq21@gmail.com     | Mandai     | 9912345332 | addressbook3 |
-+-----------+----------+---------------+--------+-------------+----------------------+------------+------------+--------------+
+    -> inner join addressbook_name on addressbook_name.addressbook_id = person_details.person_id
+    -> where person_details.city ='Nipani' or person_details.state ='Karnataka';
++-----------+----------+---------------+--------+-----------+----------------------+------------+------------+--------------+
+| firstname | lastname | Relation_type | city   | state     | email                | address    | mob_number | addressbook  |
++-----------+----------+---------------+--------+-----------+----------------------+------------+------------+--------------+
+| Altamash  | Bagwan   | Family        | Nipani | Karnataka | altamash23@gmail.com | MahatGalli | 7744918893 | addressbook1 |
++-----------+----------+---------------+--------+-----------+----------------------+------------+------------+--------------+
+1 row in set (0.00 sec)
+
+UC7-
+
+mysql> select person_details.state,count(person_details.state) from person_details inner join person_data on person_details.person_id = person_data.persondata_id
+    -> group by person_details.state;
++-------------+-----------------------------+
+| state       | count(person_details.state) |
++-------------+-----------------------------+
+| Karnataka   |                           2 |
+| Gujrat      |                           1 |
+| Maharashtra |                           1 |
+| Telangana   |                           1 |
++-------------+-----------------------------+
+4 rows in set (0.02 sec)
+
+mysql> select person_details.city,count(person_details.city) from person_details inner join person_data on person_details.person_id = person_data.persondata_id
+    -> group by person_details.city;
++-----------+----------------------------+
+| city      | count(person_details.city) |
++-----------+----------------------------+
+| Nipani    |                          1 |
+| Surat     |                          1 |
+| Karad     |                          1 |
+| Hydrabaad |                          1 |
+| Bengluru  |                          1 |
++-----------+----------------------------+
+5 rows in set (0.00 sec)
+
+UC8-
+
+mysql> select person_data.firstname,person_data.lastname,person_data.Relation_type,person_details.city,person_details.state,person_details.email,person_details.address,person_mobile_number.mob_number,addressbook_name.addressbook from person_data inner join person_mobile_number on person_data.mob_number_id = person_mobile_number.mob_number_id
+    -> inner join person_details on person_details.person_id = person_mobile_number.mob_number_id
+    -> inner join addressbook_name on addressbook_name.addressbook_id = person_details.person_id
+    -> where person_details.city = 'Karad' order by person_data.firstname;
++-----------+----------+---------------+-------+-------------+------------------+---------+------------+--------------+
+| firstname | lastname | Relation_type | city  | state       | email            | address | mob_number | addressbook  |
++-----------+----------+---------------+-------+-------------+------------------+---------+------------+--------------+
+| Salman    | Pasha    | Friend        | Karad | Maharashtra | atiq21@gmail.com | Mandai  | 9912345332 | addressbook3 |
++-----------+----------+---------------+-------+-------------+------------------+---------+------------+--------------+
+1 row in set (0.02 sec)
+
+UC10-
+
+mysql> select person_data.Relation_type,count(person_data.Relation_type) from person_data inner join person_details on person_data.persondata_id = person_details.person_id
+    -> group by person_data.Relation_type;
++---------------+----------------------------------+
+| Relation_type | count(person_data.Relation_type) |
++---------------+----------------------------------+
+| Family        |                                2 |
+| Friend        |                                2 |
+| Professional  |                                1 |
++---------------+----------------------------------+
 3 rows in set (0.00 sec)
